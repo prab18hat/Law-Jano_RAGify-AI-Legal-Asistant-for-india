@@ -1,0 +1,15 @@
+.faq-home-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0.93;
+  transition: opacity 0.15s, transform 0.13s;
+}
+.faq-home-icon:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}

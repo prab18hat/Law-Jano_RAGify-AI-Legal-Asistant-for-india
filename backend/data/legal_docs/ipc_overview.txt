@@ -1,0 +1,16 @@
+Section 1: Short Title, Extent, and Commencement
+The Indian Penal Code, 1860 (IPC), extends to the whole of India except the State of Jammu and Kashmir, and it shall come into force on the first day of January 1862.
+
+Section 2: Punishment of Offences Committed Within India
+Every person who, within India, commits an offence shall be punishable according to the provisions of this Code, unless expressly provided otherwise.
+
+Section 3: Punishment of Offences Committed Outside India
+Any person who, while not in India, commits an offence punishable under this Code, shall be punished with the same punishment as if the offence were committed within India.
+
+Section 4: Trial of Offences Committed Within India
+Offences committed in India shall be triable by a Court in India.
+
+Section 5: Punishment of Offences Committed by Indian Citizens Outside India
+Any Indian citizen who commits an offence outside India shall be punished as though the offence was committed within India.
+
+...

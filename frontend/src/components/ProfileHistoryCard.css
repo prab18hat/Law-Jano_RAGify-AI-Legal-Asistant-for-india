@@ -1,0 +1,85 @@
+.profile-history-card {
+  background: rgba(30,34,58,0.98); /* Match right container style */
+  border-radius: 28px;
+  box-shadow: 0 8px 48px 0 #0008, 0 1.5px 12px 0 #6a4cff20;
+  width: 220px;
+  min-width: 180px;
+  max-width: 250px;
+  padding: 10px 12px 8px 12px;
+  margin-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.97rem;
+  color: #fff;
+  z-index: 2;
+  animation: fadeInUp 0.8s cubic-bezier(.4,1.7,.6,.95);
+}
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-details {
+  text-align: center;
+}
+.profile-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #6a4cff;
+}
+.history-section {
+  width: 100%;
+}
+.history-title {
+  font-size: 0.93rem;
+  font-weight: 500;
+  margin-bottom: 7px;
+  color: #444;
+}
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.history-item {
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff !important;
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+  text-shadow: 0 2px 12px #23242b90, 0 1px 8px #6a4cff30;
+  box-shadow: 0 2px 8px #6a4cff33;
+  margin-bottom: 8px;
+  border: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.history-empty {
+  color: #aaa;
+  font-size: 0.92rem;
+  text-align: center;
+}

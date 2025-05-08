@@ -1,0 +1,72 @@
+:root {
+  font-family:'Times New Roman', Times, serif, sans-serif;
+  line-height: 1.5;
+  font-weight:bold;
+
+  color-scheme: light dark;
+  color: #232323;
+  /* Remove background-image here, handled in App.css */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 18px;
+  border: none;
+  padding: 7px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+  color: #232323;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  transition: background 0.2s, transform 0.13s, box-shadow 0.2s;
+}
+button:hover {
+  background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+  color: #fff;
+  transform: scale(1.07);
+  box-shadow: 0 4px 16px rgba(255,78,80,0.18);
+}
+button:focus,
+button:focus-visible {
+  outline: 3px auto #8ec5fc;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

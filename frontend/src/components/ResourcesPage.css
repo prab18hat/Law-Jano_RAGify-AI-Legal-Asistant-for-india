@@ -1,0 +1,186 @@
+.resources-root {
+  width: 100vw;
+  min-height: 100vh;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 56px;
+  padding-bottom: 30px;
+  /* Remove forced overflow so page scrolls normally */
+}
+
+body, html {
+  overflow-y: auto !important;
+  background: none !important;
+}
+
+
+/* Custom Scrollbar for Resources Page */
+.resources-root::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+.resources-root::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6a4cff 30%, #8ec5fc 100%);
+  border-radius: 8px;
+  min-height: 40px;
+}
+.resources-root::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #8ec5fc 0%, #6a4cff 100%);
+}
+.resources-root {
+  scrollbar-width: thin;
+  scrollbar-color: #6a4cff #23242b;
+}
+
+.resources-heading {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 16px #6a4cff80, 0 1px 8px #fff8;
+  text-align: center;
+  animation: glowText 2s infinite alternate;
+}
+.resources-search {
+  width: 92vw;
+  max-width: 390px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.04rem;
+  background: #23242b;
+  color: #fff;
+  box-shadow: 0 2px 12px #6a4cff20;
+  margin-bottom: 0;
+  margin-right: 0;
+  vertical-align: middle;
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px;
+  width: 96vw;
+  max-width: 1280px;
+}
+.resource-card {
+  background: rgba(34, 36, 43, 0.98);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #6a4cff22, 0 1.5px 12px 0 #6a4cff20;
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.resource-card:hover {
+  box-shadow: 0 8px 38px #6a4cff66, 0 2px 24px #fff1;
+  transform: scale(1.04);
+}
+.resource-category {
+  color: #8ec5fc;
+  font-size: 0.93rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+  text-shadow: 0 1px 8px #6a4cff30;
+}
+.resource-title {
+  color: #fff;
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.resource-desc {
+  color: #e0c3fc;
+  font-size: 0.97rem;
+  margin-bottom: 12px;
+}
+.resource-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.resource-btn {
+  padding: 6px 16px;
+  border-radius: 10px;
+  font-size: 0.97rem;
+  border: none;
+  background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+  color: #232323;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #6a4cff20;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.13s, box-shadow 0.2s;
+}
+.resource-btn:hover {
+  background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px 0 #ff4e5090, 0 2px 16px #f9d42399;
+}
+.resources-loading, .resources-empty {
+  color: #fff;
+  font-size: 1.08rem;
+  margin: 32px 0;
+  text-align: center;
+}
+@media (max-width: 1000px) {
+  .resources-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 98vw;
+  }
+  .resource-card {
+    padding: 10px 2vw 10px 2vw;
+    border-radius: 12px;
+  }
+}
+@media (max-width: 700px) {
+  .resources-heading {
+    font-size: 1.1rem;
+  }
+  .resources-search {
+    font-size: 0.93rem;
+    padding: 7px 6px;
+    max-width: 99vw;
+  }
+  .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 99vw;
+  }
+  .resource-card {
+    padding: 7px 1vw 7px 1vw;
+    border-radius: 7px;
+  }
+  .resource-title {
+    font-size: 0.95rem;
+  }
+  .resource-desc {
+    font-size: 0.89rem;
+  }
+  .resource-btn {
+    font-size: 0.89rem;
+    padding: 6px 0;
+    min-width: 70px;
+  }
+}
+@media (max-width: 400px) {
+  .resources-heading {
+    font-size: 0.95rem;
+  }
+  .resource-title {
+    font-size: 0.89rem;
+  }
+  .resource-desc {
+    font-size: 0.7rem;
+  }
+}
+@keyframes glowText {
+  from { text-shadow: 0 2px 16px #6a4cff40, 0 0 8px #fff0; }
+  to { text-shadow: 0 2px 24px #6a4cffb0, 0 0 8px #fff8; }
+}

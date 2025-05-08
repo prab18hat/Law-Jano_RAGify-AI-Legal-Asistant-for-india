@@ -1,0 +1,205 @@
+.landing-root {
+  min-height: 100vh;
+  width: 100vw;
+  background: radial-gradient(ellipse 60% 40% at 60% 30%, #2d2e36 0%, #23242b 80%),
+    linear-gradient(135deg, #232526 0%, #414345 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+.landing-center {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 120px;
+  margin-bottom: 0;
+  margin-top: 0;
+  z-index: 2;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+.landing-card {
+  background: rgba(34, 36, 43, 0.93);
+  border-radius: 32px;
+  box-shadow: 0 8px 48px 0 #0008, 0 1.5px 12px 0 #6a4cff20;
+  padding: 32px 22px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  max-width: 390px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s cubic-bezier(.4,1.7,.6,.95);
+  width: 100%;
+  box-sizing: border-box;
+}
+.logo-backdrop {
+  background: radial-gradient(circle, #fff 55%, #6a4cff80 90%, #23242b 100%);
+  border-radius: 50%;
+  padding: 18px;
+  display: inline-block;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 48px 0 #6a4cff99, 0 2px 32px #fff7, 0 0 0 8px #6a4cff33;
+}
+.landing-law-icon {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 0 42px #6a4cffcc) drop-shadow(0 0 8px #fff8);
+  animation: bounceIn 1.2s cubic-bezier(.4,1.7,.6,.95);
+}
+.landing-heading {
+  color: #fff;
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 16px #6a4cff40;
+  text-align: center;
+  line-height: 1.12;
+  animation: glowText 2s infinite alternate;
+}
+.brand-highlight {
+  color: #6a4cff;
+  text-shadow: 0 2px 16px #6a4cff80;
+}
+.landing-subheading {
+  color: #e0c3fc;
+  font-size: 0.97rem;
+  font-weight: 400;
+  margin-top: 2px;
+  margin-bottom: 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 8px #6a4cff30;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@media (max-width: 1000px) {
+  .landing-card {
+    min-width: 0;
+    max-width: 98vw;
+    padding: 18px 4vw 12px 4vw;
+    border-radius: 18px;
+  }
+  .landing-heading {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .landing-subheading {
+    font-size: 0.93rem;
+  }
+}
+@media (max-width: 900px) {
+  .landing-center {
+    bottom: 60px;
+  }
+  .landing-card {
+    max-width: 98vw;
+    min-width: 220px;
+    padding: 18px 6vw 14px 6vw;
+  }
+  .landing-heading {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 700px) {
+  .landing-center {
+    bottom: 30px;
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding: 0 2vw;
+  }
+  .landing-card {
+    min-width: 0;
+    max-width: 99vw;
+    width: 100%;
+    padding: 12px 2vw 10px 2vw;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  .landing-heading {
+    font-size: 1.05rem;
+    margin-bottom: 7px;
+  }
+  .landing-subheading {
+    font-size: 0.89rem;
+  }
+  .logo-backdrop {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  .landing-law-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .landing-center {
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0;
+    width: 100vw;
+    min-width: 0;
+    max-width: 100vw;
+    overflow-x: visible;
+    position: fixed;
+    align-items: flex-start;
+  }
+  .landing-card {
+    border-radius: 18px;
+    padding: 14px 2vw 10px 2vw;
+    min-width: 0;
+    width: 98vw;
+    max-width: 99vw;
+    margin: 0 auto;
+  }
+  .logo-backdrop {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .landing-law-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .landing-heading {
+    font-size: 1.04rem;
+    text-align: center;
+  }
+  .landing-subheading {
+    font-size: 0.92rem;
+    text-align: center;
+  }
+}
+@media (max-width: 400px) {
+  .landing-card {
+    padding: 6px 1vw 6px 1vw;
+    font-size: 0.93rem;
+    width: 100%;
+  }
+  .landing-heading {
+    font-size: 0.95rem;
+  }
+  .landing-subheading {
+    font-size: 0.7rem;
+  }
+}
+@keyframes glowText {
+  from { text-shadow: 0 2px 16px #6a4cff40, 0 0 8px #fff0; }
+  to { text-shadow: 0 2px 24px #6a4cffb0, 0 0 8px #fff8; }
+}

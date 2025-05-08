@@ -1,0 +1,18 @@
+Section 1: Short Title and Commencement
+This Act may be called the Indian Contract Act, 1872. It extends to the whole of India.
+
+Section 2: Definitions
+In this Act, unless the context otherwise requires:
+    a. "Contract" means an agreement enforceable by law.
+    b. "Agreement" means a promise or a set of promises forming the consideration for each other.
+
+Section 3: Proposal and Acceptance
+A proposal is made when one person signifies to another his willingness to do or abstain from doing something, with a view to obtaining the assent of the other to such act or abstinence.
+
+Section 4: Consideration for Contracts
+For an agreement to become a contract, there must be lawful consideration, which means something of value that is exchanged between the parties.
+
+Section 5: Capacity of Parties
+A contract is only valid if the parties entering into the contract are competent to contract. They must be of legal age, of sound mind, and not disqualified by law.
+
+...
