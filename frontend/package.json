@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "blueimp-md5": "^2.19.0",
+    "firebase": "^11.7.1",
+    "howler": "^2.2.4",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",

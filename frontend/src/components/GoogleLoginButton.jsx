@@ -3,7 +3,7 @@ import googleLogo from "../assets/google-logo.png";
 
 const GoogleLoginButton = ({ onClick, role }) => {
   function handleClick() {
-    window.location.href = `http://localhost:8000/google/login?role=${role||'user'}`;
+    window.location.href = `/google/login?role=${role||'user'}`;
   }
   return (
     <button className="google-login-btn" onClick={handleClick}>

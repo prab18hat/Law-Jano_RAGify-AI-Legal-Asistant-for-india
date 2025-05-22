@@ -19,6 +19,8 @@ import LegalSupport from "./components/LegalSupport";
 import LegalSupportHomeButton from "./components/LegalSupportHomeButton";
 import Auth from "./components/Auth";
 
+import LawyerChat from "./components/LawyerChat";
+
 function App() {
   // Persist state to localStorage for user, page, and auth
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -29,7 +31,13 @@ function App() {
   const [pendingNav, setPendingNav] = useState(null);
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("user");
-    return stored ? JSON.parse(stored) : { name: "Guest", avatar: null, total: 0, email: "", role: "user" };
+    let parsed = stored ? JSON.parse(stored) : { name: "Guest", avatar: null, total: 0, email: "", role: "user" };
+    // Ensure uid exists for chat identity
+    if (!parsed.uid && parsed.email) {
+      // Use md5 to generate a deterministic uid from email
+      parsed.uid = md5(parsed.email.trim().toLowerCase());
+    }
+    return parsed;
   });
   const [showLanding, setShowLanding] = useState(() => {
     const stored = localStorage.getItem("page");
@@ -45,9 +53,25 @@ function App() {
   const [language, setLanguage] = useState("en"); // Default language is English
   const [showAuthPage, setShowAuthPage] = useState(false);
 
+  // For LawyerChat navigation
+  const [showLawyerChat, setShowLawyerChat] = useState(false);
+  const [lawyerChatInfo, setLawyerChatInfo] = useState(null);
+  useEffect(() => {
+    window.startLawyerChat = (lawyer) => {
+      setLawyerChatInfo(lawyer);
+      setShowLawyerChat(true);
+    };
+    return () => { window.startLawyerChat = null; };
+  }, []);
+
   // Save user and page state to localStorage on change
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    // Ensure uid exists for chat identity
+    let updated = { ...user };
+    if (!updated.uid && updated.email) {
+      updated.uid = md5(updated.email.trim().toLowerCase());
+    }
+    localStorage.setItem("user", JSON.stringify(updated));
   }, [user]);
   useEffect(() => {
     if (showLanding) localStorage.setItem("page", "landing");
@@ -79,7 +103,7 @@ function App() {
 
       // Fetch persistent history from backend
       if (email) {
-        fetch(`http://localhost:8000/user/history?email=${encodeURIComponent(email)}`)
+        fetch(`/user/history?email=${encodeURIComponent(email)}`)
           .then(res => res.json())
           .then(data => {
             if (Array.isArray(data.history)) {
@@ -119,7 +143,7 @@ function App() {
       const userMessage = { role: "user", content: question };
       setQuestion("");
       try {
-        const response = await fetch("http://localhost:8000/ask", {
+        const response = await fetch("/ask", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: question, language }),
@@ -130,7 +154,7 @@ function App() {
           setChatHistory((prev) => [...prev, userMessage, assistantMessage]);
           // Save question to backend for logged-in users
           if (isAuthenticated && user.email) {
-            fetch("http://localhost:8000/user/history", {
+            fetch("/user/history", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email: user.email, question })
@@ -159,7 +183,7 @@ function App() {
 
   const handleClear = async () => {
     try {
-      await fetch("http://localhost:8000/clear", {
+      await fetch("/clear", {
         method: "POST",
       });
       setChatHistory([]);
@@ -189,7 +213,7 @@ function App() {
     async function fetchRelated() {
       setLoadingRelated(true);
       try {
-        const resp = await fetch(`http://localhost:8000/related_questions?query=${encodeURIComponent(question)}`);
+        const resp = await fetch(`/related_questions?query=${encodeURIComponent(question)}`);
         const data = await resp.json();
         if (!ignore) setRelatedQuestions(data);
       } catch {
@@ -274,6 +298,18 @@ function App() {
       setPendingNav(null);
     }
   };
+
+  if (showLawyerChat && lawyerChatInfo) {
+    return (
+      <LawyerChat
+        user={user}
+        lawyerId={lawyerChatInfo.email || lawyerChatInfo.contact_email}
+        lawyerName={lawyerChatInfo.name}
+        lawyerAvatar={lawyerChatInfo.avatar || logo}
+        onBack={() => setShowLawyerChat(false)}
+      />
+    );
+  }
 
   if (showAuthPage) {
     return <Auth show={true} onClose={() => {
