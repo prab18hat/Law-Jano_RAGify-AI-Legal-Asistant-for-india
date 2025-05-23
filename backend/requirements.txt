@@ -65,7 +65,7 @@ aiofiles==24.1.0
 httpx==0.26.0
 requests==2.31.0
 requests-toolbelt==1.0.0
-starlette==0.27.0
+# starlette is installed as a FastAPI dependency
 websockets==12.0
 urllib3==2.0.7
 
