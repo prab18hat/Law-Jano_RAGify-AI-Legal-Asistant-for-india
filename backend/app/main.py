@@ -92,7 +92,7 @@ class QuestionRequest(BaseModel):
     token: Optional[str] = None  # Optional authentication token
 
 # Ask route for JSON input (Updated with optional authentication)
-@app.post("/api/ask")
+@app.post("/ask")
 async def ask_question(request: QuestionRequest):
     # Optional token validation
     if request.token:
@@ -198,7 +198,7 @@ async def ask_question(request: QuestionRequest):
     return {"answer": answer, "citations": citations}
 
 # Existing routes remain unchanged
-@app.post("/api/ask_form")
+@app.post("/ask_form")
 async def ask_question_form(
     question: str = Form(...),
     language: Optional[str] = Form("english")
@@ -213,12 +213,12 @@ async def ask_question_form(
     answer = ask_grok(modified_question)
     return {"answer": answer}
 
-@app.get("/api/related_questions")
+@app.get("/related_questions")
 async def related_questions(query: str = FastAPIQuery("", description="User's question"), top_k: int = 6) -> List[str]:
     """Returns related legal questions for a given query."""
     return get_related_questions(query, top_k)
 
-@app.post("/api/clear")
+@app.post("/clear")
 async def clear_chat():
     chat_history.clear()
     return {"message": "Chat history cleared."}
@@ -228,7 +228,7 @@ class UserHistoryRequest(BaseModel):
     email: EmailStr
     question: str
 
-@app.post("/api/user/history")
+@app.post("/user/history")
 def add_user_history(item: UserHistoryRequest):
     users = get_user_collection()
     if users is None:
@@ -240,7 +240,7 @@ def add_user_history(item: UserHistoryRequest):
     )
     return {"message": "History updated"}
 
-@app.get("/api/user/history")
+@app.get("/user/history")
 def get_user_history(email: EmailStr):
     users = get_user_collection()
     if users is None:
@@ -293,11 +293,11 @@ class LawyerProfile(BaseModel):
 
 lawyer_profiles = {}
 
-@app.post("/api/lawyer/profile")
+@app.post("/lawyer/profile")
 def create_or_update_lawyer_profile(profile: LawyerProfile):
     lawyer_profiles[profile.email] = profile.dict()
     return {"message": "Profile updated", "profile": profile}
 
-@app.get("/api/lawyer/profiles")
+@app.get("/lawyer/profiles")
 def get_lawyer_profiles():
     return list(lawyer_profiles.values())

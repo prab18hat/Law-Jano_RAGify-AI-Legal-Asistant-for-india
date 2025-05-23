@@ -50,7 +50,7 @@ function LawyerProfileForm({ user, onProfileUpdated }) {
   const handleSubmit = async e => {
     e.preventDefault();
     setStatus("Saving...");
-    const resp = await fetch("/api/lawyer/profile", {
+    const resp = await fetch("http://localhost:8000/lawyer/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
@@ -128,7 +128,7 @@ export default function LegalSupport({ user, onHome }) {
   // Fetch lawyers if user is not a lawyer
   useEffect(() => {
     if (user?.role === "lawyer") return;
-    fetch("/api/lawyer/profiles")
+    fetch("http://localhost:8000/lawyer/profiles")
       .then(res => res.json())
       .then(data => setLawyers(data));
   }, [user]);
@@ -136,7 +136,7 @@ export default function LegalSupport({ user, onHome }) {
   // Fetch own profile if lawyer
   useEffect(() => {
     if (user?.role !== "lawyer") return;
-    fetch("/api/lawyer/profiles")
+    fetch("http://localhost:8000/lawyer/profiles")
       .then(res => res.json())
       .then(data => {
         const found = data.find(l => l.email === user.email);
@@ -152,7 +152,7 @@ export default function LegalSupport({ user, onHome }) {
       email: user.email,
       contact_email: profile.contact_email || user.email
     };
-    const resp = await fetch("/api/lawyer/profile", {
+    const resp = await fetch("http://localhost:8000/lawyer/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(profileToSave)

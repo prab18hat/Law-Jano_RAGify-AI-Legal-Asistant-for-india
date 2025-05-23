@@ -50,7 +50,7 @@ const ChatBox = () => {
         console.log("[DEBUG] Sending language code:", language);
 
         try {
-            const res = await fetch("/api/ask", {
+            const res = await fetch("http://localhost:8000/ask", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ question, language }), // sending language too
@@ -74,7 +74,7 @@ const ChatBox = () => {
     const speakText = async (text, languageCode) => {
         try {
             setIsSpeaking(true);
-            const res = await fetch('/api/tts', {
+            const res = await fetch('http://localhost:8000/api/tts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

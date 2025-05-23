@@ -18,7 +18,7 @@ export default function ResourcesPage() {
         setError(null);
       } catch (err1) {
         try {
-          let resp = await fetch("/api/resources");
+          let resp = await fetch("http://localhost:8000/api/resources");
           if (!resp.ok) throw new Error();
           const data = await resp.json();
           setResources(data);

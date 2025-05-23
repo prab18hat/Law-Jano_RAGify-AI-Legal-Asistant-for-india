@@ -22,7 +22,7 @@ const AuthModal = ({ show, onClose, onAuthSuccess, onSkip, mode = "login", legal
     setLoading(true);
     setError("");
     try {
-      const resp = await fetch("/api/v1/generate-otp", 
+      const resp = await fetch("http://localhost:8000/generate-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contact: email, role })
@@ -45,7 +45,7 @@ const AuthModal = ({ show, onClose, onAuthSuccess, onSkip, mode = "login", legal
     setLoading(true);
     setError("");
     try {
-      const resp = await fetch("/api/v1/verify-otp", 
+      const resp = await fetch("http://localhost:8000/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contact: email, otp, role })
@@ -119,7 +119,7 @@ const AuthModal = ({ show, onClose, onAuthSuccess, onSkip, mode = "login", legal
           </form>
         )}
         <div style={{ margin: '1rem 0' }}>
-          <GoogleLoginButton role={role} onClick={() => window.location.href = '/google/login'} />
+          <GoogleLoginButton role={role} onClick={() => window.location.href = 'http://localhost:8000/google/login'} />
         </div>
         {/* Show skip button only when not legalSupport */}
         {!legalSupport && (
