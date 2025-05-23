@@ -170,4 +170,4 @@ xlrd==2.0.1
 XlsxWriter==3.2.3
 yarl==1.20.0
 zstandard==0.23.0
-
+PyJWT==2.8.0
