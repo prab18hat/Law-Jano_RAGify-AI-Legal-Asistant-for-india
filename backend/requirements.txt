@@ -44,7 +44,7 @@ pdf2image==1.17.0
 pdfminer.six==20231228
 python-pptx==0.6.23
 unstructured==0.12.2
-unstructured-inference==0.7.22
+unstructured-inference==0.7.21
 unstructured.pytesseract==0.3.12
 beautifulsoup4==4.12.2
 lxml==5.1.0
