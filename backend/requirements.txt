@@ -153,7 +153,6 @@ torch==2.7.0
 torchvision==0.22.0
 tqdm==4.67.1
 transformers==4.51.3
-twilio
 typer==0.15.2
 typing-inspect==0.9.0
 typing-inspection==0.4.0
