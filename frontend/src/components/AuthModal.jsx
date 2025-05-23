@@ -22,7 +22,7 @@ const AuthModal = ({ show, onClose, onAuthSuccess, onSkip, mode = "login", legal
     setLoading(true);
     setError("");
     try {
-      const resp = await fetch("/generate-otp", {
+      const resp = await fetch("/api/v1/generate-otp", 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contact: email, role })
@@ -45,7 +45,7 @@ const AuthModal = ({ show, onClose, onAuthSuccess, onSkip, mode = "login", legal
     setLoading(true);
     setError("");
     try {
-      const resp = await fetch("/verify-otp", {
+      const resp = await fetch("/api/v1/verify-otp", 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contact: email, otp, role })

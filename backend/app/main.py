@@ -13,6 +13,7 @@ from app.resources_api import router as resources_router
 from app.indictrans2_translate import translate_text
 from app.google_auth import router as google_auth_router
 from app.database import get_user_collection
+from app.tts_service import synthesize_speech
 
 # New authentication import
 from app.auth import UserAuth
@@ -91,7 +92,7 @@ class QuestionRequest(BaseModel):
     token: Optional[str] = None  # Optional authentication token
 
 # Ask route for JSON input (Updated with optional authentication)
-@app.post("/ask")
+@app.post("/api/ask")
 async def ask_question(request: QuestionRequest):
     # Optional token validation
     if request.token:
@@ -173,7 +174,7 @@ async def ask_question(request: QuestionRequest):
         'command', 'injunction', 'prohibition', 'certiorari', 'mandamus', 'quo warranto', 'habeas corpus',
         'contempt', 'punishment', 'fine', 'imprisonment', 'sentence', 'release', 'bail', 'bond', 'surety',
         'recognizance', 'undertaking', 'guarantee', 'security', 'seizure', 'confiscation', 'forfeiture', 'penalty',
-        'sanction', 'prosecution', 'complaint', 'charge', 'information', 'indictment',
+        'sanction', 'prosecution', 'complaint', 'hacked', 'charge', 'information', 'indictment',
     ]
     # Only check keywords on translated_question (in English)
     question_lower = translated_question.lower()
@@ -197,7 +198,7 @@ async def ask_question(request: QuestionRequest):
     return {"answer": answer, "citations": citations}
 
 # Existing routes remain unchanged
-@app.post("/ask_form")
+@app.post("/api/ask_form")
 async def ask_question_form(
     question: str = Form(...),
     language: Optional[str] = Form("english")
@@ -212,12 +213,12 @@ async def ask_question_form(
     answer = ask_grok(modified_question)
     return {"answer": answer}
 
-@app.get("/related_questions")
+@app.get("/api/related_questions")
 async def related_questions(query: str = FastAPIQuery("", description="User's question"), top_k: int = 6) -> List[str]:
     """Returns related legal questions for a given query."""
     return get_related_questions(query, top_k)
 
-@app.post("/clear")
+@app.post("/api/clear")
 async def clear_chat():
     chat_history.clear()
     return {"message": "Chat history cleared."}
@@ -227,7 +228,7 @@ class UserHistoryRequest(BaseModel):
     email: EmailStr
     question: str
 
-@app.post("/user/history")
+@app.post("/api/user/history")
 def add_user_history(item: UserHistoryRequest):
     users = get_user_collection()
     if users is None:
@@ -239,7 +240,7 @@ def add_user_history(item: UserHistoryRequest):
     )
     return {"message": "History updated"}
 
-@app.get("/user/history")
+@app.get("/api/user/history")
 def get_user_history(email: EmailStr):
     users = get_user_collection()
     if users is None:
@@ -248,6 +249,34 @@ def get_user_history(email: EmailStr):
     if user and "history" in user:
         return {"history": user["history"]}
     return {"history": []}
+
+# --- Lawyer Profile Endpoints ---
+from pydantic import BaseModel, EmailStr
+
+# TTS Endpoint
+@app.post("/api/tts")
+async def text_to_speech(text: str = Form(...), language_code: str = Form("hi-IN")):
+    """Convert text to speech audio"""
+    try:
+        # Set the API key in the environment
+        os.environ['GOOGLE_API_KEY'] = "AIzaSyD9x6BVDTyWZbWxWQVoSO_yZROFwt4y6Ro"
+        
+        audio_content = synthesize_speech(text, language_code)
+        
+        # Convert audio content to base64 string
+        import base64
+        audio_base64 = base64.b64encode(audio_content).decode('utf-8')
+        
+        return JSONResponse(
+            content={
+                "success": True, 
+                "audio_content": audio_base64,
+                "language": language_code
+            },
+            media_type="application/json"
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # --- Lawyer Profile Endpoints ---
 from pydantic import BaseModel, EmailStr
@@ -264,11 +293,11 @@ class LawyerProfile(BaseModel):
 
 lawyer_profiles = {}
 
-@app.post("/lawyer/profile")
+@app.post("/api/lawyer/profile")
 def create_or_update_lawyer_profile(profile: LawyerProfile):
     lawyer_profiles[profile.email] = profile.dict()
     return {"message": "Profile updated", "profile": profile}
 
-@app.get("/lawyer/profiles")
+@app.get("/api/lawyer/profiles")
 def get_lawyer_profiles():
     return list(lawyer_profiles.values())

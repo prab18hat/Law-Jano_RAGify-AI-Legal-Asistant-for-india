@@ -103,7 +103,7 @@ function App() {
 
       // Fetch persistent history from backend
       if (email) {
-        fetch(`/user/history?email=${encodeURIComponent(email)}`)
+        fetch(`/api/user/history?email=${encodeURIComponent(email)}`)
           .then(res => res.json())
           .then(data => {
             if (Array.isArray(data.history)) {
@@ -143,7 +143,7 @@ function App() {
       const userMessage = { role: "user", content: question };
       setQuestion("");
       try {
-        const response = await fetch("/ask", {
+        const response = await fetch("/api/ask", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: question, language }),
@@ -154,7 +154,7 @@ function App() {
           setChatHistory((prev) => [...prev, userMessage, assistantMessage]);
           // Save question to backend for logged-in users
           if (isAuthenticated && user.email) {
-            fetch("/user/history", {
+            fetch("/api/user/history", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email: user.email, question })
@@ -183,7 +183,7 @@ function App() {
 
   const handleClear = async () => {
     try {
-      await fetch("/clear", {
+      await fetch("/api/clear", {
         method: "POST",
       });
       setChatHistory([]);
@@ -213,7 +213,7 @@ function App() {
     async function fetchRelated() {
       setLoadingRelated(true);
       try {
-        const resp = await fetch(`/related_questions?query=${encodeURIComponent(question)}`);
+        const resp = await fetch(`/api/related_questions?query=${encodeURIComponent(question)}`);
         const data = await resp.json();
         if (!ignore) setRelatedQuestions(data);
       } catch {
