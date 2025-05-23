@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { API_URL } from "./config";
 import "./App.css";
 import logo from "./assets/lawjano-logo.png";
 import VoiceInput from "./components/VoiceInput";
@@ -103,7 +104,7 @@ function App() {
 
       // Fetch persistent history from backend
       if (email) {
-        fetch(`http://localhost:8000/user/history?email=${encodeURIComponent(email)}`)
+        fetch(`${API_URL}/user/history?email=${encodeURIComponent(email)}`)
           .then(res => res.json())
           .then(data => {
             if (Array.isArray(data.history)) {
@@ -143,7 +144,7 @@ function App() {
       const userMessage = { role: "user", content: question };
       setQuestion("");
       try {
-        const response = await fetch("http://localhost:8000/ask", {
+        const response = await fetch(`${API_URL}/ask`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: question, language }),
@@ -154,7 +155,7 @@ function App() {
           setChatHistory((prev) => [...prev, userMessage, assistantMessage]);
           // Save question to backend for logged-in users
           if (isAuthenticated && user.email) {
-            fetch("http://localhost:8000/user/history", {
+            fetch(`${API_URL}/user/history`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email: user.email, question })
@@ -183,7 +184,7 @@ function App() {
 
   const handleClear = async () => {
     try {
-      await fetch("http://localhost:8000/clear", {
+      await fetch(`${API_URL}/clear`, {
         method: "POST",
       });
       setChatHistory([]);
@@ -213,7 +214,7 @@ function App() {
     async function fetchRelated() {
       setLoadingRelated(true);
       try {
-        const resp = await fetch(`http://localhost:8000/related_questions?query=${encodeURIComponent(question)}`);
+        const resp = await fetch(`${API_URL}/related_questions?query=${encodeURIComponent(question)}`);
         const data = await resp.json();
         if (!ignore) setRelatedQuestions(data);
       } catch {

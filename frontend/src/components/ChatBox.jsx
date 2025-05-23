@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaMoon, FaSun, FaVolumeUp } from "react-icons/fa";
 import { Howl } from 'howler';
 import logo from "../assets/lawjano-logo.png";
+import { API_URL } from "../config";
 
 const ChatBox = () => {
     const [theme, setTheme] = useState("light"); // light or dark
@@ -50,7 +51,7 @@ const ChatBox = () => {
         console.log("[DEBUG] Sending language code:", language);
 
         try {
-            const res = await fetch("http://localhost:8000/ask", {
+            const res = await fetch(`${API_URL}/ask`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ question, language }), // sending language too
@@ -74,7 +75,7 @@ const ChatBox = () => {
     const speakText = async (text, languageCode) => {
         try {
             setIsSpeaking(true);
-            const res = await fetch('http://localhost:8000/api/tts', {
+            const res = await fetch(`${API_URL}/api/tts`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

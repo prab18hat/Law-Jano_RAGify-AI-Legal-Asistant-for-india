@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import "./ResourcesPage.css";
 
 export default function ResourcesPage() {
@@ -11,14 +12,14 @@ export default function ResourcesPage() {
     async function fetchResources() {
       setLoading(true);
       try {
-        let resp = await fetch("/api/resources");
+        let resp = await fetch(`${API_URL}/api/resources`);
         if (!resp.ok) throw new Error();
         const data = await resp.json();
         setResources(data);
         setError(null);
       } catch (err1) {
         try {
-          let resp = await fetch("http://localhost:8000/api/resources");
+          let resp = await fetch(`${API_URL}/api/resources`);
           if (!resp.ok) throw new Error();
           const data = await resp.json();
           setResources(data);
