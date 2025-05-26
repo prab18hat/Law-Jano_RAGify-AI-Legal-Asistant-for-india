@@ -6,7 +6,7 @@ email-validator==2.1.0.post1
 python-multipart==0.0.9
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
-fastapi-mail==1.8.0
+fastapi-mail==1.5.0
 python-dotenv==1.0.1
 aiofiles==24.1.0
 aiohappyeyeballs==2.6.1
