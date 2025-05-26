@@ -1,4 +1,13 @@
+# Core Dependencies
 google-cloud-texttospeech==2.14.1
+PyJWT==2.8.0
+pymongo==4.6.0
+email-validator==2.1.0.post1
+python-multipart==0.0.9
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+fastapi-mail==1.8.0
+python-dotenv==1.0.1
 aiofiles==24.1.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.11.18
@@ -167,4 +176,3 @@ uvicorn==0.34.2
 webencodings==0.5.1
 wrapt==1.17.2
 xlrd==2.0.1
-PyJWT==2.8.0
